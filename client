@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import socket
+import numpy as np
+
+sock = socket.socket()
+sock.connect(('localhost', 9024))
+sock.send('hello, world!')
+
+types = {
+    1: np.int8,
+    2: np.int16,
+    4: np.int32
+}
+
+
+
+while(True):
+    data = sock.recv(1024)
+    if not data:
+        break
+    
+	samples = np.fromstring(''.join(b.frames), dtype=types[2])
+    fourier_transform = np.fft.fft(samples)
+    
+    #somehow to plot fourier_transform    
+
+
+print data
